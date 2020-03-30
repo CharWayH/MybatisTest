@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--对应dao类的位置-->
+<mapper namespace="com.charwayh.dao.TeamDao">
+    <!--dao对应的方法名-->
+    <select id="findAll" resultType="com.charwayh.domain.Team">
+        select * from team;
+    </select>
+
+    <!--添加队伍-->
+    <insert id="addTeam" parameterType="com.charwayh.domain.Team">
+      insert into team(teamname,leaguename,tenglishname,city) values(#{teamName},#{leagueName},#{tEnglishName},#{city});
+    </insert>
+
+
+    <!--更新队伍信息-->
+    <insert id="updateTeam" parameterType="com.charwayh.domain.Team">
+      update team set teamname = #{teamName},leaguename=#{leagueName},tEnglishName=#{tEnglishName} where tid=#{tid};
+    </insert>
+
+    <!--根据tid删除队伍信息-->
+    <delete id="deleteTeam" parameterType="com.charwayh.domain.Team">
+      delete from team where tid=#{tid};
+    </delete>
+
+    <!--根据id查询队伍-->
+    <select id="findTeamById" resultType="com.charwayh.domain.Team" parameterType="INT">
+        select * from team where tid=#{tid};
+    </select>
+
+
+    <!--根据城市查询队伍-->
+    <select id="findTeamByCiy" resultType="com.charwayh.domain.Team" parameterType="String">
+        select * from team where city like #{city};
+    </select>
+
+
+    <!--根据城市查询队伍-->
+    <select id="totalTeam" resultType="int">
+        select count(*) from team;
+    </select>
+</mapper>
